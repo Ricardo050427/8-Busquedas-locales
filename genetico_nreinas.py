@@ -72,7 +72,7 @@ if __name__ == "__main__":
     # profesor (el cual se conoce como genetico.GeneticoPermutaciones)
     # buscando que el algoritmo encuentre SIEMPRE una solución óptima,
     # utilizando el menor tiempo posible en promedio. Realiza esto
-    # para las 8, 16, 32 y 64 reinas.
+    # para las 8, 16, 32, 64 y 128 reinas.
     #
     # Lo que puedes modificar es el tamaño de la población, el número
     # de generaciones y/o la probabilidad de mutación.
@@ -103,7 +103,7 @@ if __name__ == "__main__":
     # genetico_tarea.GeneticoPermutacionesPropio). De ser muchos
     # parámetros, restringete a 2 o 3, buscando que el algoritmo
     # encuentre SIEMPRE una solución óptima, utilizando el menor
-    # tiempo posible en promedio. Realiza esto para las 8, 16, 32 y 64
+    # tiempo posible en promedio. Realiza esto para las 8, 16, 32, 64 y 128
     # reinas.
     #
     #   -- ¿Cuales son en cada caso los mejores valores?

@@ -12,7 +12,7 @@ gráfos por computadora pero da una idea de la utilidad de los métodos de
 optimización en un problema divertido.
 
 Para realizar este problema es necesario contar con el módulo Pillow
-instalado (en Anaconda se instala por default. Si no se encuentr instalado,
+instalado (en Anaconda se instala por default. Si no se encuentra instalado,
 desde la termnal se puede instalar utilizando
 
 $pip install pillow
@@ -118,9 +118,7 @@ class problema_grafica_grafo(blocales.Problema):
                             vecino[i] + random.randint(-dmax,  dmax)))
         return tuple(vecino)
 
-        #######################################################################
-        #                          20 PUNTOS
-        #######################################################################
+        
         # Por supuesto que esta no es la mejor manera de generar vecinos.
         #
         # Propon una manera alternativa de vecino_aleatorio y muestra que
@@ -165,13 +163,16 @@ class problema_grafica_grafo(blocales.Problema):
         # (positivo o negativo). Igualemtente se puede penalizar el
         # que dos nodos estén muy cercanos entre si en la gráfica
         #
-        # Así, vamos a calcular el costo en trescuatro partes, una es el
+        # Así, vamos a calcular el costo en cuatro partes, una es el
         # numero de cruces (ya programada), otra la distancia entre
         # nodos (ya programada) y otro el angulo entre arista de cada
         # nodo (para programar). Por último, un criterio propio
         #
         # Al final, es necesario darle un peso lineal a cada uno de
-        # los subcriterios.
+        # los subcriterios. ¿Que valores de diste a K1, K2 y K3 respectivamente?
+        # 
+        # Justifica tu criterio
+  
 
     def numero_de_cruces(self, estado_dic):
         """
@@ -266,18 +267,9 @@ class problema_grafica_grafo(blocales.Problema):
         @return: Un número.
 
         """
-        #######################################################################
-        #                          20 PUNTOS
-        #######################################################################
         # Agrega el método que considere el angulo entre aristas de
         # cada vertice. Dale diferente peso a cada criterio hasta
-        # lograr que el sistema realice gráficas "bonitas"
-        #
-        # ¿Que valores de diste a K1, K2 y K3 respectivamente?
-        #
-        #
-        # ------ IMPLEMENTA AQUI TU CÓDIGO ------------------------------------
-        #
+ 
         return 0
 
     def criterio_propio(self, estado_dic):
@@ -293,18 +285,10 @@ class problema_grafica_grafo(blocales.Problema):
         @return: Un número.
 
         """
-        #######################################################################
-        #                          20 PUNTOS
-        #######################################################################
-        # ¿Crees que hubiera sido bueno incluir otro criterio? ¿Cual?
-        #
         # Desarrolla un criterio propio y ajusta su importancia en el
         # costo total con K4 ¿Mejora el resultado? ¿En que mejora el
         # resultado final?
-        #
-        #
-        # ------ IMPLEMENTA AQUI TU CÓDIGO ------------------------------------
-        #
+
         return 0
 
     def estado2dic(self, estado):
@@ -394,9 +378,6 @@ def main():
     print("Costo de la solución encontrada: {}".format(costo_final))
     print("Tiempo de ejecución en segundos: {}".format(t_final - t_inicial))
 
-    ##########################################################################
-    #                          20 PUNTOS
-    ##########################################################################
     # ¿Que valores para ajustar el temple simulado son los que mejor
     # resultado dan?
     #
@@ -411,9 +392,9 @@ def main():
     # parámetros para que obtenga la mejor solución posible en el
     # menor tiempo posible.
     #
-    # Escribe aqui tus conclusiones
+    # Inventate un grafo más feo y muestra como el temple simulado lo hace lucir mejor.
     #
-    # ------ IMPLEMENTA AQUI TU CÓDIGO ---------------------------------------
+    # Escribe aqui tus conclusiones
     #
 
 
