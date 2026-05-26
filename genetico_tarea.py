@@ -163,7 +163,7 @@ class GeneticoPermutacionesPropio(genetico.Genetico):
         # Calcular adaptación de los hijos
         hijos = [(self.adaptación(h), h) for h in individuos]
         
-        # Ordenar padres y seleccionar élite (10%)
+        # Ordenar padres y seleccionar elite (10%)
         self.población.sort(reverse=True)
         n_elite = max(1, self.n_población // 10)
         elites = self.población[:n_elite]
