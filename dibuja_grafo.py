@@ -354,6 +354,25 @@ def calendarizador_geometrico(problema, alpha=0.995, tol=0.001):
         t *= alpha
 
 
+def calendarizador_lundy_mees(problema, beta=0.001, tol=0.001):
+    """
+    calendarizador de Lundy-Mees: T = T / (1 + beta * T).
+    Es un descenso de temperatura muy suave y continuo.
+    """
+    costos = [
+        problema.costo(problema.estado_aleatorio())
+        for _ in range(10 * len(problema.estado_aleatorio()))
+    ]
+    minimo, maximo = min(costos), max(costos)
+    t = 2.0 * (maximo - minimo)
+    if t == 0:
+        t = 100.0
+    while t > tol:
+        yield t
+        t = t / (1.0 + beta * t)
+
+
+
 def main():
     """
     ejecuta las pruebas para el dibujo de grafos con temple simulado.
@@ -391,9 +410,21 @@ def main():
     costo_final = grafo_sencillo.costo(solucion)
 
     grafo_sencillo.dibuja_grafo(solucion, "prueba_final.gif")
-    print("Utilizando la calendarizacion geometrica y vecino mejorado")
-    print("Costo de la solucion encontrada: {}".format(costo_final))
-    print("Tiempo de ejecucion en segundos: {}".format(t_final - t_inicial))
+    print("Utilizando la calendarizacion geometrica:")
+    print("  Costo de la solucion encontrada: {}".format(costo_final))
+    print("  Tiempo de ejecucion en segundos: {}".format(t_final - t_inicial))
+
+    # prueba con calendarizacion Lundy-Mees y vecino mejorado
+    t_inicial = time.time()
+    cal = calendarizador_lundy_mees(grafo_sencillo, beta=0.05)
+    solucion = blocales.temple_simulado(grafo_sencillo, cal)
+    t_final = time.time()
+    costo_final = grafo_sencillo.costo(solucion)
+
+    grafo_sencillo.dibuja_grafo(solucion, "prueba_final_lundy.gif")
+    print("Utilizando la calendarizacion Lundy-Mees:")
+    print("  Costo de la solucion encontrada: {}".format(costo_final))
+    print("  Tiempo de ejecucion en segundos: {}".format(t_final - t_inicial))
 
     # grafo mas feo (grafo de petersen)
     print("\nGrafo de Petersen (grafo mas complejo):")
@@ -419,8 +450,21 @@ def main():
     costo_fin_petersen = grafo_petersen.costo(sol_petersen)
 
     grafo_petersen.dibuja_grafo(sol_petersen, "petersen_final.gif")
-    print("Costo final obtenido: {}".format(costo_fin_petersen))
-    print("Tiempo de ejecucion en segundos: {}".format(t_fin_p - t_ini_p))
+    print("Utilizando la calendarizacion geometrica:")
+    print("  Costo final obtenido: {}".format(costo_fin_petersen))
+    print("  Tiempo de ejecucion en segundos: {}".format(t_fin_p - t_ini_p))
+
+    t_ini_p = time.time()
+    cal_p = calendarizador_lundy_mees(grafo_petersen, beta=0.015)
+    sol_petersen = blocales.temple_simulado(grafo_petersen, cal_p)
+    t_fin_p = time.time()
+    costo_fin_petersen = grafo_petersen.costo(sol_petersen)
+
+    grafo_petersen.dibuja_grafo(sol_petersen, "petersen_final_lundy.gif")
+    print("Utilizando la calendarizacion Lundy-Mees:")
+    print("  Costo final obtenido: {}".format(costo_fin_petersen))
+    print("  Tiempo de ejecucion en segundos: {}".format(t_fin_p - t_ini_p))
+
 
 
 if __name__ == '__main__':
