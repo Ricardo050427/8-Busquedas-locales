@@ -12,7 +12,7 @@ genético para resolver problemas de permutaciones
 import random
 import genetico
 
-__author__ = 'Tu nombre'
+__author__ = 'Francisco Ricardo Hernandez Astorga'
 
 
 class GeneticoPermutacionesPropio(genetico.Genetico):
@@ -20,7 +20,7 @@ class GeneticoPermutacionesPropio(genetico.Genetico):
     Clase con un algoritmo genético adaptado a problemas de permutaciones
 
     """
-    def __init__(self, problema, n_población):
+    def __init__(self, problema, n_población, prob_muta=0.05):
         """
         Aqui puedes poner algunos de los parámetros
         que quieras utilizar en tu clase
@@ -31,11 +31,9 @@ class GeneticoPermutacionesPropio(genetico.Genetico):
         estado_a_cadena).
 
         """
-        self.nombre = 'propuesto por el alumno'
+        self.nombre = 'propuesto por el alumno (Lehmer code)'
+        self.prob_muta = prob_muta
         super().__init__(problema, n_población)
-        #
-        # ------ IMPLEMENTA AQUI TU CÓDIGO -----------------------------------
-        #
 
     @staticmethod
     def estado_a_cadena(estado):
@@ -47,10 +45,18 @@ class GeneticoPermutacionesPropio(genetico.Genetico):
         @return: Una lista con una cadena de caracteres
 
         """
-        #
-        # ------ IMPLEMENTA AQUI TU CÓDIGO --------------------------------
-        #
-        raise NotImplementedError("¡Este metodo debe ser implementado!")
+        n = len(estado)
+        sorted_vals = sorted(estado)
+        rank_map = {val: idx for idx, val in enumerate(sorted_vals)}
+        ranks = [rank_map[x] for x in estado]
+        
+        L = list(range(n))
+        cadena = []
+        for val in ranks:
+            idx = L.index(val)
+            cadena.append(idx)
+            L.pop(idx)
+        return cadena
 
     @staticmethod
     def cadena_a_estado(cadena):
@@ -62,10 +68,14 @@ class GeneticoPermutacionesPropio(genetico.Genetico):
         @return: Una tupla con un estado válido
 
         """
-        #
-        # ------ IMPLEMENTA AQUI TU CÓDIGO --------------------------------
-        #
-        raise NotImplementedError("¡Este metodo debe ser implementado!")
+        n = len(cadena)
+        L = list(range(n))
+        estado = []
+        for idx in cadena:
+            idx = max(0, min(len(L) - 1, int(idx)))
+            estado.append(L.pop(idx))
+        return tuple(estado)
+
 
         
     def adaptación(self, individuo):
